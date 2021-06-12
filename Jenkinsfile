@@ -9,8 +9,19 @@ pipeline {
     }
 
     stage('Docker Env') {
-      steps {
-        sh 'docker -v'
+      parallel {
+        stage('Docker Env') {
+          steps {
+            sh 'docker -v'
+          }
+        }
+
+        stage('Images from docker') {
+          steps {
+            sh 'docker images'
+          }
+        }
+
       }
     }
 
